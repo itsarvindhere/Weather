@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>WeatherNow - Check the current Weather in your City</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">🌧️ WeatherNow</h1>
+      <p class="lead">Just Enter the name of your city in the input box below & click the button to get back the current Weather in your City. </p>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <form action="/" method="post">
+      <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="City Name" name="cityName">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit">Check Weather</button>
+      </div>
+    </div>
+    </form>
+   </div>
+    <p class="text-center mt-5 mb-3 text-muted">Created by Arvind Rana using the OpenWeather API.</p>
+  </body>
+</html>
