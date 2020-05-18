@@ -19,42 +19,83 @@ app.post("/", function(req,res){
   https.get(url, function(response){
     response.on("data", function(data){
       const weatherObject = JSON.parse(data);
-      const temp = weatherObject.main.temp;
-      const description = weatherObject.weather[0].description;
-      const icon = weatherObject.weather[0].icon;
-      const iconPath = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
 
-      res.send(`<!doctype html>
-      <html lang="en">
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-          <meta name="description" content="">
-          <meta name="author" content="">
-          <title>WeatherNow - Check the current Weather in your City</title>
 
-          <!-- Bootstrap core CSS -->
-          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-          <!-- Custom styles for this template -->
-          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
 
-          <link href="css/style.css" rel="stylesheet">
-        </head>
-        <body>
-          <div class="jumbotron jumbotron-fluid">
-          <div class="container">
-          <h1 class="display-4">Temperature in ${cityName} is ${temp}°C</h1>
-          <p class="lead"><img src="${iconPath}"> ${description.toUpperCase()}</p>
-        </div>
-        <form action="/return" method="post">
-      <button class="btn btn-lg btn-info" type="submit" name="button"> Search Another City</button>
-      </form>
-        </div>
+        if(weatherObject.cod == 200) {
+          const temp = weatherObject.main.temp;
+          const description = weatherObject.weather[0].description;
+          const icon = weatherObject.weather[0].icon;
+          const iconPath = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+          res.send(`<!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+              <meta name="description" content="">
+              <meta name="author" content="">
+              <title>WeatherNow - Check the current Weather in your City</title>
 
-        </body>
-      </html>`);
-    })
+              <!-- Bootstrap core CSS -->
+              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+              <!-- Custom styles for this template -->
+              <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+
+              <link href="css/style.css" rel="stylesheet">
+            </head>
+            <body>
+              <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+              <h1 class="display-4">Temperature in ${cityName} is ${temp}°C</h1>
+              <p class="lead"><img src="${iconPath}"> ${description.toUpperCase()}</p>
+            </div>
+            <form action="/return" method="post">
+          <button class="btn btn-lg btn-info" type="submit" name="button"> Search Another City</button>
+          </form>
+            </div>
+
+            </body>
+          </html>`);
+            }
+
+        else {
+          res.send(`<!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+              <meta name="description" content="">
+              <meta name="author" content="">
+              <title>WeatherNow - Check the current Weather in your City</title>
+
+              <!-- Bootstrap core CSS -->
+              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+              <!-- Custom styles for this template -->
+              <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+
+              <link href="css/style.css" rel="stylesheet">
+            </head>
+            <body>
+              <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+              <h1 class="display-4">OOPS</h1>
+              <p class="lead">Sorry! Weather Data not available for the location you specified. Try another Location.</p>
+            </div>
+            <form action="/return" method="post">
+          <button class="btn btn-lg btn-info" type="submit" name="button"> Search Another City</button>
+          </form>
+            </div>
+
+            </body>
+          </html>`);
+        }
+
+
+
+    });
   })
 
 
