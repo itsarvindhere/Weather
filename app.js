@@ -12,6 +12,7 @@ app.get("/", function(req,res){
 });
 
 app.post("/", function(req,res){
+  var unit = req.body.unit;
   var cityName = req.body.cityName;
   const apiKey = "YOUR API KEY HERE";
   const url = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+apiKey+"&units=metric";
@@ -19,12 +20,10 @@ app.post("/", function(req,res){
   https.get(url, function(response){
     response.on("data", function(data){
       const weatherObject = JSON.parse(data);
-
-
-
-
         if(weatherObject.cod == 200) {
           const temp = weatherObject.main.temp;
+          const tempInF = (temp * 9/5) + 32;
+          const tempToShow = unit === 'c' ? temp + '°C' : tempInF + '°F';
           const description = weatherObject.weather[0].description;
           const icon = weatherObject.weather[0].icon;
           const iconPath = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
@@ -48,11 +47,12 @@ app.post("/", function(req,res){
             <body>
               <div class="jumbotron jumbotron-fluid">
               <div class="container">
-              <h1 class="display-4">Temperature in ${cityName} is ${temp}°C</h1>
+              <h1 class="display-4">Temperature in ${cityName} is ${tempToShow}</h1>
               <p class="lead"><img src="${iconPath}"> ${description.toUpperCase()}</p>
+              <form action="/return" method="post">
+          
+              <button class="btn btn-lg btn-info" type="submit" name="button"> Search Another City</button>
             </div>
-            <form action="/return" method="post">
-          <button class="btn btn-lg btn-info" type="submit" name="button"> Search Another City</button>
           </form>
             </div>
 

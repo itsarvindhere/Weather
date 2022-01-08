@@ -25,12 +25,18 @@
   </div>
 
   <div class="container-fluid">
-    <form action="/" method="post">
+    <form action="/" method="post" style="text-align: center;">
       <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="City Name" name="cityName">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit">Check Weather</button>
+        <select id="tempUnit" class="form-control" style="border-radius: 0;" name="unit">
+          <option selected value="c">Celcius</option>
+          <option value="f">Fahrenheit</option>
+        </select>
       </div>
+    </div>
+    <div class="button-container">
+      <button class="btn btn-outline-secondary" type="submit">Check Weather</button>
     </div>
     </form>
    </div>
